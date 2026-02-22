@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Chatbot from "./components/Chatbot";
+import ParticleConstellation from "./components/ParticleConstellation";
+import CursorTrail from "./components/CursorTrail";
+import "./App.css";
 
 function App() {
+  const [activeField, setActiveField] = useState("default");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ParticleConstellation activeField={activeField} />
+      <CursorTrail />
+      <Chatbot onFieldChange={setActiveField} />
+    </>
   );
 }
 
