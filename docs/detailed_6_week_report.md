@@ -1,0 +1,17 @@
+# Detailed 6-Week Project Report: Career-Chatbot
+
+| S.No | Date | Description of Activity/Work carried | Remarks (Reflection) | Challenges faced and Solution |
+| :--- | :--- | :--- | :--- | :--- |
+| **1** | 2026-01-13 to 2026-01-19 | **Phase 1: Project Kickoff & Setup**. Initialized React environment, established file structure, and created basic UI shell. | Setting up a solid foundation is crucial for scalability. The decision to use React with a clean service-based architecture ensures long-term maintainability. | **Challenge**: Managing complex state for multi-step guidance. <br>**Solution**: Implemented a centralized state management approach in `App.js` to track user progress. |
+| **2** | 2026-01-20 to 2026-01-26 | **Phase 2: Core NLP Implementation**. Developed `nlpService.js` and integrated Hugging Face for intent detection. | Zero-shot classification allows the bot to understand varied student phrasing without massive training data, making it highly flexible. | **Challenge**: High latency from external NLP APIs impacting user experience. <br>**Solution**: Implemented local regex fallbacks for common education terms to provide instant responses. |
+| **3** | 2026-01-27 to 2026-02-02 | **Phase 3: Career Data & Guidance Engine**. Populated localized career data and implemented `guidanceEngine.js` for deterministic rule mapping. | Focusing on the Indian education context (PCM/PCB, JEE/NEET) makes the tool highly relevant to the target audience. | **Challenge**: Handling follow-up questions about specific career nuances (salary, lifestyle). <br>**Solution**: Created `careerQuestionResolver.js` to extract specific "detail intents" and map them to enriched data fields. |
+| **4** | 2026-02-03 to 2026-02-09 | **Phase 4: Bilingual Support (Kannada/English)**. Integrated language toggles and translated core UI/Career data into Kannada. | Multi-language support significantly increases accessibility for rural students who are more comfortable with regional languages. | **Challenge**: Layout breakage when switching to Kannada due to different text lengths. <br>**Solution**: Refactored CSS to use flexible flexbox layouts and adjusted container sizing for regional fonts. |
+| **5** | 2026-02-10 to 2026-02-16 | **Phase 5: PDF Roadmap Service**. Built `roadmapService.js` and implemented customized career roadmap exports. | Providing a tangible PDF download gives students a concrete takeaway from their interaction with the bot. | **Challenge**: Kannada text rendering incorrectly in exported PDFs (shaping issues). <br>**Solution**: Used `html2canvas` to capture the roadmap as a high-resolution image before embedding it into the `jsPDF` document. |
+| **6** | 2026-02-17 to 2026-02-23 | **Phase 6: Groq AI Integration & Refinement**. Integrated Groq AI for high-speed inference and refined the fallback logic. | The addition of Groq AI makes the bot feel "human-like" and capable of handling complex, nuanced comparative career questions. | **Challenge**: Managing API key security and server-side fallbacks. <br>**Solution**: Secured keys using `.env` variables and implemented a tiered fallback system (Local -> Groq -> Gemini). |
+
+---
+
+## Technical Summary
+- **Primary Tech**: React, Vanilla CSS, Groq API, Hugging Face.
+- **Key Outcome**: A bilingual, AI-powered career counselor capable of providing detailed growth metrics and downloadable roadmaps.
+- **Next Steps**: Further UI Polish and expanding the career database to include 100+ specialized vocational paths.

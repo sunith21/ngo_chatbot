@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detailed 6-Week Project Report: Career-Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 40px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .summary-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f4f7f6;
+            border-left: 5px solid #2c3e50;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            text-align: center;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Detailed 6-Week Project Report: Career-Chatbot</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Date</th>
+                <th>Description of Activity/Work carried</th>
+                <th>Remarks (Reflection)</th>
+                <th>Challenges faced and Solution</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2026-01-13 to 2026-01-19</td>
+                <td><strong>Phase 1: Project Kickoff & Setup</strong>. Initialized React environment, established file structure, and created basic UI shell.</td>
+                <td>Setting up a solid foundation is crucial for scalability. The decision to use React with a clean service-based architecture ensures long-term maintainability.</td>
+                <td><strong>Challenge</strong>: Managing complex state for multi-step guidance.<br><strong>Solution</strong>: Implemented a centralized state management approach in App.js to track user progress.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2026-01-20 to 2026-01-26</td>
+                <td><strong>Phase 2: Core NLP Implementation</strong>. Developed nlpService.js and integrated Hugging Face for intent detection.</td>
+                <td>Zero-shot classification allows the bot to understand varied student phrasing without massive training data, making it highly flexible.</td>
+                <td><strong>Challenge</strong>: High latency from external NLP APIs impacting user experience.<br><strong>Solution</strong>: Implemented local regex fallbacks for common education terms to provide instant responses.</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2026-01-27 to 2026-02-02</td>
+                <td><strong>Phase 3: Career Data & Guidance Engine</strong>. Populated localized career data and implemented guidanceEngine.js for deterministic rule mapping.</td>
+                <td>Focusing on the Indian education context (PCM/PCB, JEE/NEET) makes the tool highly relevant to the target audience.</td>
+                <td><strong>Challenge</strong>: Handling follow-up questions about specific career nuances (salary, lifestyle).<br><strong>Solution</strong>: Created careerQuestionResolver.js to extract specific "detail intents" and map them to enriched data fields.</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2026-02-03 to 2026-02-09</td>
+                <td><strong>Phase 4: Bilingual Support (Kannada/English)</strong>. Integrated language toggles and translated core UI/Career data into Kannada.</td>
+                <td>Multi-language support significantly increases accessibility for rural students who are more comfortable with regional languages.</td>
+                <td><strong>Challenge</strong>: Layout breakage when switching to Kannada due to different text lengths.<br><strong>Solution</strong>: Refactored CSS to use flexible flexbox layouts and adjusted container sizing for regional fonts.</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2026-02-10 to 2026-02-16</td>
+                <td><strong>Phase 5: PDF Roadmap Service</strong>. Built roadmapService.js and implemented customized career roadmap exports.</td>
+                <td>Providing a tangible PDF download gives students a concrete takeaway from their interaction with the bot.</td>
+                <td><strong>Challenge</strong>: Kannada text rendering incorrectly in exported PDFs (shaping issues).<br><strong>Solution</strong>: Used html2canvas to capture the roadmap as a high-resolution image before embedding it into the jsPDF document.</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>2026-02-17 to 2026-02-23</td>
+                <td><strong>Phase 6: Groq AI Integration & Refinement</strong>. Integrated Groq AI for high-speed inference and refined the fallback logic.</td>
+                <td>The addition of Groq AI makes the bot feel "human-like" and capable of handling complex, nuanced comparative career questions.</td>
+                <td><strong>Challenge</strong>: Managing API key security and server-side fallbacks.<br><strong>Solution</strong>: Secured keys using .env variables and implemented a tiered fallback system (Local -> Groq -> Gemini).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="summary-section">
+        <h3>Technical Summary</h3>
+        <ul>
+            <li><strong>Primary Tech</strong>: React, Vanilla CSS, Groq API, Hugging Face.</li>
+            <li><strong>Key Outcome</strong>: A bilingual, AI-powered career counselor capable of providing detailed growth metrics and downloadable roadmaps.</li>
+            <li><strong>Next Steps</strong>: Further UI Polish and expanding the career database to include 100+ specialized vocational paths.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>Generated on 2026-02-22 | Career-Chatbot Project Development Team</p>
+    </div>
+
+</body>
+</html>
