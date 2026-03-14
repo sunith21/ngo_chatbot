@@ -800,14 +800,21 @@ export function findComparisonMatch(text) {
 
     if (!isComparison && !isSuitability) return null;
 
+    // Personal preference queries ("I love biology but hate...", "I enjoy coding", etc.)
+    // are too nuanced for a comparison table — they need AI personalisation.
+    // In these cases, disable the single-keyword suitability shortcut so the query
+    // can fall through to the AI fast-path. Dual-keyword explicit comparisons still work.
+    const isPersonalPreference = /\b(i love|i like|i hate|i dislike|i enjoy|i don'?t like|i am good at|i'm good at|i am interested|i'm interested|i am passionate|i'm passionate|my interest|my hobby|my passion|i prefer|i find)\b/i.test(lower);
+
     // Match against keyword pairs in each comparison entry
     for (const [key, entry] of Object.entries(careerComparisons)) {
         for (const [kw1, kw2] of entry.keywords) {
             if (lower.includes(kw1) && lower.includes(kw2)) {
                 return { entry, key };
             }
-            // Also match single-keyword suitability (e.g. "will medicine suit me")
-            if (isSuitability && (lower.includes(kw1) || lower.includes(kw2))) {
+            // Single-keyword suitability match (e.g. "will medicine suit me")
+            // — disabled for personal preference queries so AI can handle them.
+            if (isSuitability && !isPersonalPreference && (lower.includes(kw1) || lower.includes(kw2))) {
                 return { entry, key };
             }
         }

@@ -272,8 +272,10 @@ export function handleFreeText(text, lang = 'en') {
         }
     }
 
-    // Minimum threshold — at least one keyword must match
-    if (!bestTopic || bestScore === 0) return null;
+    // Raised threshold — require score > 1 so that a single stray keyword
+    // (like "study" in a complex open-ended question) doesn't swallow the query.
+    // Those low-confidence cases fall through to the AI fast-path instead.
+    if (!bestTopic || bestScore <= 1) return null;
 
     let response = bestTopic[lang] || bestTopic.en;
     // Special handling for mental health — check for specific exam context

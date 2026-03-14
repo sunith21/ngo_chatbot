@@ -423,12 +423,53 @@ const Chatbot = ({ onFieldChange }) => {
     // ── 1.5. Free text semantic handler
     // Handles parental pressure, abroad, generic salary anxiety, job market, arts stigma, etc.
     // Runs AFTER career resolver so named-career queries get specific answers first.
+    // NOTE: handleFreeText now requires score > 1 — single stray keywords fall through.
     const freeResult = handleFreeText(userText, lang);
     if (freeResult) {
       addBotMessage(freeResult.response);
       if (freeResult.followUp) setTimeout(() => addBotMessage(freeResult.followUp), 1200);
       setIsProcessing(false);
       return;
+    }
+
+    // ── 1.7. Smart AI fast-path for open-ended career questions
+    // When no local handler matched confidently, route genuinely open-ended questions
+    // directly to Groq → Gemini BEFORE the slow HF NLP pipeline.
+    // This covers queries like:
+    //   "I love biology but hate studying for hours — what suits me?"
+    //   "Is data science oversaturated in India in 2025?"
+    //   "What is the difference between BCA and B.Sc CS?"
+    const CAREER_SIGNALS = [
+      'career', 'job', 'study', 'after 12', 'after 10', 'stream', 'future',
+      'exam', 'college', 'salary', 'scope', 'worth', 'course', 'degree',
+      'field', 'profession', 'work', 'earn', 'path', 'option', 'choose',
+      'should i', 'what should', 'which is better', 'how to become',
+    ];
+    const QUESTION_STARTERS = /^(what|how|why|which|should|can|is|will|does|do|who|where|when|would|could)\b/i;
+    const looksLikeCareerQuestion =
+      lower.split(/\s+/).length > 5 ||
+      QUESTION_STARTERS.test(lower) ||
+      CAREER_SIGNALS.some(sig => lower.includes(sig));
+
+    if (looksLikeCareerQuestion) {
+      try {
+        const aiContext = {
+          step: state.step,
+          career: state.selectedCareer?.name?.en || null,
+        };
+        setTyping(true);
+        const aiResp = await askGroq(userText, currentMessages, aiContext)
+          || await askGemini(userText, currentMessages, aiContext);
+        setTyping(false);
+        if (aiResp) {
+          addBotMessage(aiResp, 0);
+          setIsProcessing(false);
+          return;
+        }
+      } catch (aiErr) {
+        setTyping(false);
+        console.warn('[AI fast-path] failed:', aiErr.message);
+      }
     }
 
     // ── 2. Interest detection — works from any step

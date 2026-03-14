@@ -392,6 +392,14 @@ export function resolveCareerQuestion(text, allCareers, lang = 'en') {
     const career = allCareers.find(c => c.id === careerId);
     if (!career) return null;
 
+    // ── PERSONAL / SUITABILITY GUARD ─────────────────────────────────
+    // If the user is asking a personal preference or suitability question
+    // ("I love X but hate Y", "what suits me", "help me choose"), the
+    // structured career data can't give a useful personalised answer.
+    // Return null so the AI fast-path can handle it.
+    const personalKeywords = /\b(i love|i like|i hate|i dislike|i enjoy|i don'?t like|suits? me|suit me|interest me|what should i|help me choose|which is better for me|suggest|recommend|what career|good for me|right for me|right career|which career|which path|what path|kya karu|kya banu|not sure|confused|torn between|undecided)\b/i;
+    if (personalKeywords.test(text)) return null;
+
     // ── COMPLEXITY GUARD ──────────────────────────────────────────────
     // If it's a "Can I combine X and Y" or "X vs Y" question, 
     // it's too nuanced for structured data. Let Groq/Gemini handle it.
