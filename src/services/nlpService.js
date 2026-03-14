@@ -1,6 +1,14 @@
 const HF_API_KEY = process.env.REACT_APP_HF_API_KEY;
 const API_BASE = "https://api-inference.huggingface.co/models";
 
+// Resolves to null after `ms` milliseconds — used to cap slow HF API calls.
+function withTimeout(promise, ms = 2000) {
+    return Promise.race([
+        promise,
+        new Promise(resolve => setTimeout(() => resolve(null), ms)),
+    ]);
+}
+
 const CANDIDATE_INTENTS = [
     "greeting",
     "class_10_guidance",
@@ -30,33 +38,26 @@ export async function getSentiment(text) {
     if (!HF_API_KEY) return null;
 
     try {
-        const response = await fetch(`${API_BASE}/distilbert-base-uncased-finetuned-sst-2-english`, {
+        const fetchPromise = fetch(`${API_BASE}/distilbert-base-uncased-finetuned-sst-2-english`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${HF_API_KEY}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ inputs: text })
-        });
+        }).then(r => r.ok ? r.json() : null).then(r => r?.[0] ?? null);
 
-        if (!response.ok) return null;
-        const result = await response.json();
-        // Result is usually [[{label: "POSITIVE", score: 0.9}, {label: "NEGATIVE", score: 0.1}]]
-        return result[0];
-    } catch (error) {
-        console.error("Sentiment analysis failed:", error);
+        return await withTimeout(fetchPromise, 2000);
+    } catch {
         return null;
     }
 }
 
 export async function classifyIntent(text) {
-    if (!HF_API_KEY) {
-        console.warn("No Hugging Face API key found. Falling back to regex.");
-        return null;
-    }
+    if (!HF_API_KEY) return null;
 
     try {
-        const response = await fetch(`${API_BASE}/facebook/bart-large-mnli`, {
+        const fetchPromise = fetch(`${API_BASE}/facebook/bart-large-mnli`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${HF_API_KEY}`,
@@ -64,26 +65,17 @@ export async function classifyIntent(text) {
             },
             body: JSON.stringify({
                 inputs: text,
-                parameters: {
-                    candidate_labels: CANDIDATE_INTENTS
-                }
+                parameters: { candidate_labels: CANDIDATE_INTENTS }
             })
-        });
+        }).then(r => r.ok ? r.json() : null).then(r => r ? ({
+            intent: r.labels?.[0] || "fallback",
+            confidence: r.scores?.[0] || 0,
+            allLabels: r.labels || [],
+            allScores: r.scores || []
+        }) : null);
 
-        if (!response.ok) {
-            console.error("HF API error:", response.status);
-            return null;
-        }
-
-        const result = await response.json();
-        return {
-            intent: result.labels?.[0] || "fallback",
-            confidence: result.scores?.[0] || 0,
-            allLabels: result.labels || [],
-            allScores: result.scores || []
-        };
-    } catch (error) {
-        console.error("Intent classification failed:", error);
+        return await withTimeout(fetchPromise, 2000);
+    } catch {
         return null;
     }
 }
@@ -127,19 +119,13 @@ export function mapEntitiesToState(nerEntities, text) {
 }
 
 export async function paraphraseResponse(baseResponse, context) {
-    if (!HF_API_KEY) {
-        return baseResponse;
-    }
+    if (!HF_API_KEY) return baseResponse;
 
     try {
         const streamInfo = context.stream ? `student in ${context.stream}` : "student";
-        const prompt = `Rewrite this career guidance in a friendly, empathetic, and encouraging tone. 
-Keep the information accurate and concise. 
-Add a small supportive gesture or emoji if it feels natural.
-Input: "${baseResponse}"
-Context: Guidance for a ${streamInfo}.`;
+        const prompt = `Rewrite this career guidance in a friendly, empathetic, and encouraging tone. Keep the information accurate and concise. Input: "${baseResponse}" Context: Guidance for a ${streamInfo}.`;
 
-        const response = await fetch(`${API_BASE}/google/flan-t5-base`, {
+        const fetchPromise = fetch(`${API_BASE}/google/flan-t5-base`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${HF_API_KEY}`,
@@ -147,23 +133,12 @@ Context: Guidance for a ${streamInfo}.`;
             },
             body: JSON.stringify({
                 inputs: prompt,
-                parameters: {
-                    max_length: 150,
-                    temperature: 0.7
-                }
+                parameters: { max_length: 150, temperature: 0.7 }
             })
-        });
+        }).then(r => r.ok ? r.json() : null).then(r => r?.[0]?.generated_text || null);
 
-        if (!response.ok) {
-            console.error("Paraphrase API error:", response.status);
-            return baseResponse;
-        }
-
-        const result = await response.json();
-        // flan-t5 usually returns [{generated_text: "..."}]
-        return result[0]?.generated_text || baseResponse;
-    } catch (error) {
-        console.error("Paraphrasing failed:", error);
+        return await withTimeout(fetchPromise, 2000) || baseResponse;
+    } catch {
         return baseResponse;
     }
 }

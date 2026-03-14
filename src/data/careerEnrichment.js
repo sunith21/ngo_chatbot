@@ -239,6 +239,126 @@ const careerEnrichment = {
         },
         topCompanies: ["SBI", "RBI", "HDFC Bank", "ICICI Bank", "Bank of Baroda", "NABARD"],
         relatedCareers: ["ca", "civil-services"]
+    },
+    "architecture": {
+        detailedDescription: {
+            en: "Architecture blends art, science, and engineering. Architects design the built environment — from homes and hospitals to airports and smart cities.",
+            kn: "ವಾಸ್ತುಶಿಲ್ಪ ಕಲೆ, ವಿಜ್ಞಾನ ಮತ್ತು ಎಂಜಿನಿಯರಿಂಗ್ ಸಂಯೋಜಿಸುತ್ತದೆ. ಆರ್ಕಿಟೆಕ್ಟ್‌ಗಳು ಮನೆ, ಆಸ್ಪತ್ರೆ ಮತ್ತು ಸ್ಮಾರ್ಟ್ ನಗರ ವಿನ್ಯಾಸ ಮಾಡುತ್ತಾರೆ."
+        },
+        futureOutlook: {
+            en: "India's smart city mission, affordable housing push, and real estate boom are creating massive demand for architects.",
+            kn: "ಸ್ಮಾರ್ಟ್ ಸಿಟಿ, ಕೈಗೆಟಕುವ ವಸತಿ ಮತ್ತು ರಿಯಲ್ ಎಸ್ಟೇಟ್ ಬೂಮ್ ವಾಸ್ತುಶಿಲ್ಪಿಗಳ ಬೇಡಿಕೆ ಹೆಚ್ಚಿಸುತ್ತಿವೆ."
+        },
+        topCompanies: ["Hafeez Contractor", "CPWD", "DDA", "Real Estate Firms", "Urban Planning Depts"],
+        relatedCareers: ["btech-core", "ui-ux-design"]
+    },
+    "merchant-navy": {
+        detailedDescription: {
+            en: "Merchant Navy officers operate commercial vessels transporting goods across the globe. It's one of the highest-paying careers with a unique lifestyle of 6 months at sea, 6 months off.",
+            kn: "ಮರ್ಚೆಂಟ್ ನೇವಿ ಅಧಿಕಾರಿಗಳು ಜಾಗತಿಕ ವ್ಯಾಪಾರ ಸರಕು ಸಾಗಿಸುವ ಹಡಗುಗಳನ್ನು ಆಪರೇಟ್ ಮಾಡುತ್ತಾರೆ. ಇದು ಅತ್ಯಧಿಕ ಸಂಬಳ ಹೊಂದಿರುವ ವೃತ್ತಿ."
+        },
+        futureOutlook: {
+            en: "90% of global trade moves by sea. India is among the world's top seafarer-supplying nations — demand is consistently strong.",
+            kn: "ಜಾಗತಿಕ ವ್ಯಾಪಾರದ 90% ಸಮುದ್ರ ಮೂಲಕ ನಡೆಯುತ್ತದೆ. ಭಾರತ ಅಗ್ರ ನಾವಿಕ ಪೂರೈಕೆ ರಾಷ್ಟ್ರ."
+        },
+        topCompanies: ["Shipping Corporation of India", "Maersk", "MSC", "Anglo Eastern", "Bernhard Schulte"],
+        relatedCareers: ["btech-core", "defence-tech"]
+    },
+    "data-analytics": {
+        detailedDescription: {
+            en: "Data analysts and BI professionals transform raw data into actionable business insights. From e-commerce to healthcare, every organization needs data expertise.",
+            kn: "ಡೇಟಾ ವಿಶ್ಲೇಷಕರು ಕಚ್ಚಾ ಡೇಟಾವನ್ನು ಉಪಯೋಗಿಸಬಹುದಾದ ವ್ಯವಹಾರ ಒಳನೋಟಗಳಾಗಿ ಪರಿವರ್ತಿಸುತ್ತಾರೆ."
+        },
+        futureOutlook: {
+            en: "India needs 11M data professionals by 2026. It's one of the fastest-growing and best-paying fields with a massive skill gap.",
+            kn: "2026ರ ವೇಳೆಗೆ ಭಾರತಕ್ಕೆ 1.1 Cr ಡೇಟಾ ವೃತ್ತಿಪರರ ಅಗತ್ಯ. ವೇಗವಾಗಿ ಬೆಳೆಯುತ್ತಿರುವ ಕ್ಷೇತ್ರ."
+        },
+        topCompanies: ["Flipkart", "Zomato", "Deloitte", "IBM", "Mu Sigma", "Fractal Analytics"],
+        relatedCareers: ["btech-cs-ai", "actuarial-science"]
+    },
+    "dentistry": {
+        detailedDescription: {
+            en: "Dentists diagnose and treat problems of the teeth, gums, and mouth. Private practice offers high income and independence; specializations (orthodontics, oral surgery) multiply earning potential.",
+            kn: "ದಂತ ವೈದ್ಯರು ಹಲ್ಲು, ವಸಡು ಮತ್ತು ಬಾಯಿ ಸಮಸ್ಯೆ ರೋಗನಿರ್ಣಯ ಮಾಡಿ ಚಿಕಿತ್ಸೆ ನೀಡುತ್ತಾರೆ. ಖಾಸಗಿ ಅಭ್ಯಾಸ ಉತ್ತಮ ಆದಾಯ ನೀಡುತ್ತದೆ."
+        },
+        futureOutlook: {
+            en: "Only 1 dentist per 10,000 Indians vs WHO recommendation of 1:7500. Massive shortage = massive opportunity.",
+            kn: "ಭಾರತದಲ್ಲಿ 10,000 ಜನರಿಗೆ ಒಬ್ಬ ದಂತ ವೈದ್ಯ. ಇದು ದೊಡ್ಡ ಅವಕಾಶ."
+        },
+        topCompanies: ["Apollo Dental", "Clove Dental", "Sabka Dentist", "Private Practice"],
+        relatedCareers: ["mbbs", "allied-health"]
+    },
+    "veterinary": {
+        detailedDescription: {
+            en: "Veterinarians treat animals ranging from pets to livestock. India's growing pet industry, food safety requirements, and zoos are creating diverse opportunities.",
+            kn: "ಪಶುವೈದ್ಯರು ಸಾಕು ಪ್ರಾಣಿಗಳಿಂದ ಜಾನುವಾರು ವರೆಗೆ ಚಿಕಿತ್ಸೆ ನೀಡುತ್ತಾರೆ. ಭಾರತದ ಪೆಟ್ ಉದ್ಯಮ ವೇಗವಾಗಿ ಬೆಳೆಯುತ್ತಿದೆ."
+        },
+        futureOutlook: {
+            en: "India's pet industry is growing at 20% annually. Livestock health, dairy industry, and food safety drive government veterinary roles.",
+            kn: "ಭಾರತದ ಪೆಟ್ ಉದ್ಯಮ ವಾರ್ಷಿಕ 20% ಬೆಳೆಯುತ್ತಿದೆ. ಜಾನುವಾರು, ಡೇರಿ ಮತ್ತು ಆಹಾರ ಸುರಕ್ಷತೆ ಸರ್ಕಾರಿ ಪಶುವೈದ್ಯ ಸ್ಥಾನ ಚಾಲನೆ ನೀಡುತ್ತದೆ."
+        },
+        topCompanies: ["Government Veterinary Services", "BAIF", "Zoological Survey of India", "Zoetis"],
+        relatedCareers: ["mbbs", "biotech-research"]
+    },
+    "journalism": {
+        detailedDescription: {
+            en: "Journalists and media professionals inform, investigate, and shape public opinion. Digital media has exploded opportunities for content creators, podcasters, and video journalists.",
+            kn: "ಪತ್ರಕರ್ತರು ಮತ್ತು ಮಾಧ್ಯಮ ವೃತ್ತಿಪರರು ಸಾರ್ವಜನಿಕ ಅಭಿಪ್ರಾಯ ತಿಳಿಸಿ, ತನಿಖೆ ಮಾಡಿ ರೂಪಿಸುತ್ತಾರೆ."
+        },
+        futureOutlook: {
+            en: "OTT, YouTube, and digital news have created thousands of new media jobs. Data journalism and video content are the fastest-growing formats.",
+            kn: "OTT, YouTube ಮತ್ತು ಡಿಜಿಟಲ್ ಸುದ್ದಿ ಸಾವಿರಾರು ಹೊಸ ಮಾಧ್ಯಮ ಉದ್ಯೋಗ ರಚಿಸಿವೆ."
+        },
+        topCompanies: ["NDTV", "Times of India", "The Hindu", "Hindustan Times", "YouTube/OTT Platforms"],
+        relatedCareers: ["socio-public-policy", "digital-marketing"]
+    },
+    "hotel-management": {
+        detailedDescription: {
+            en: "Hospitality professionals manage hotels, resorts, and events. It's a global career that combines customer service, operations, and culinary arts — with excellent travel perks.",
+            kn: "ಆತಿಥ್ಯ ವೃತ್ತಿಪರರು ಹೋಟೆಲ್, ರೆಸಾರ್ಟ್ ಮತ್ತು ಕಾರ್ಯಕ್ರಮ ನಿರ್ವಹಿಸುತ್ತಾರೆ. ಉತ್ತಮ ಪ್ರಯಾಣ ಸೌಲಭ್ಯ ಹೊಂದಿದ ಜಾಗತಿಕ ವೃತ್ತಿ."
+        },
+        futureOutlook: {
+            en: "India's tourism sector is projected to create 30M jobs by 2030. International hotel brands are aggressively expanding in tier-2 cities.",
+            kn: "ಭಾರತದ ಪ್ರವಾಸೋದ್ಯಮ ಕ್ಷೇತ್ರ 2030ರ ವೇಳೆಗೆ 3 ಕೋಟಿ ಉದ್ಯೋಗ ರಚಿಸಲಿದೆ."
+        },
+        topCompanies: ["Taj Hotels", "Oberoi", "ITC Hotels", "Marriott", "Hyatt", "Club Mahindra"],
+        relatedCareers: ["management-bba", "entrepreneurship"]
+    },
+    "fashion-design": {
+        detailedDescription: {
+            en: "Fashion designers create clothing, accessories, and textiles. From high fashion to mass retail, India's booming fashion industry offers diverse creative and commercial opportunities.",
+            kn: "ಫ್ಯಾಷನ್ ಡಿಸೈನರ್‌ಗಳು ಉಡುಪು, ಆಭರಣ ಮತ್ತು ಜವಳಿ ರಚಿಸುತ್ತಾರೆ. ಭಾರತದ ಫ್ಯಾಷನ್ ಉದ್ಯಮ ಸೃಜನಾತ್ಮಕ ಅವಕಾಶ ನೀಡುತ್ತದೆ."
+        },
+        futureOutlook: {
+            en: "India's fashion industry is worth $100B+ and growing. D2C brands, ethnic wear exports, and sustainable fashion are driving new opportunities.",
+            kn: "ಭಾರತದ ಫ್ಯಾಷನ್ ಉದ್ಯಮ ₹8 ಲಕ್ಷ ಕೋಟಿ+ ಮೌಲ್ಯ ಹೊಂದಿದೆ ಮತ್ತು ಬೆಳೆಯುತ್ತಿದೆ."
+        },
+        topCompanies: ["FabIndia", "Myntra", "Nykaa Fashion", "Manyavar", "Raymond", "Own Label"],
+        relatedCareers: ["ui-ux-design", "digital-marketing"]
+    },
+    "animation-vfx": {
+        detailedDescription: {
+            en: "Animators and VFX artists create the visual magic in movies, games, ads, and OTT content. India is becoming a global animation outsourcing hub.",
+            kn: "ಅನಿಮೇಟರ್‌ಗಳು ಮತ್ತು VFX ಕಲಾವಿದರು ಚಲನಚಿತ್ರ, ಆಟ ಮತ್ತು OTT ವಿಷಯದಲ್ಲಿ ದೃಶ್ಯ ಮಾಯೆ ರಚಿಸುತ್ತಾರೆ."
+        },
+        futureOutlook: {
+            en: "India's animation and VFX industry is growing at 20%+ annually. OTT boom, gaming, and AR/VR are creating thousands of new roles.",
+            kn: "ಭಾರತದ ಅನಿಮೇಷನ್ ಮತ್ತು VFX ಉದ್ಯಮ ವಾರ್ಷಿಕ 20%+ ಬೆಳೆಯುತ್ತಿದೆ. OTT, ಗೇಮಿಂಗ್ ಮತ್ತು AR/VR ಹೊಸ ಪಾತ್ರಗಳು ರಚಿಸುತ್ತಿವೆ."
+        },
+        topCompanies: ["Prana Studios", "Prime Focus", "Reliance Entertainment", "Technicolor", "Netflix India"],
+        relatedCareers: ["ui-ux-design", "journalism"]
+    },
+    "teaching": {
+        detailedDescription: {
+            en: "Teachers and educators shape the next generation. Beyond classrooms, the EdTech revolution has opened high-paying opportunities in curriculum design, online instruction, and educational technology.",
+            kn: "ಶಿಕ್ಷಕರು ಮತ್ತು ಶಿಕ್ಷಣ ತಜ್ಞರು ಮುಂದಿನ ಪೀಳಿಗೆಯನ್ನು ರೂಪಿಸುತ್ತಾರೆ. EdTech ಕ್ರಾಂತಿ ಉನ್ನತ ವೇತನ ಅವಕಾಶ ರಚಿಸಿದೆ."
+        },
+        futureOutlook: {
+            en: "India's EdTech sector is a $4B+ industry. Demand for quality online educators, curriculum designers, and tech-integrated teachers is booming.",
+            kn: "ಭಾರತದ EdTech ಕ್ಷೇತ್ರ $4B+ ಉದ್ಯಮ. ಗುಣಮಟ್ಟದ ಆನ್‌ಲೈನ್ ಶಿಕ್ಷಕರ ಬೇಡಿಕೆ ಏರುತ್ತಿದೆ."
+        },
+        topCompanies: ["BYJU'S", "Unacademy", "Vedantu", "WhiteHat Jr", "CBSE Schools", "International Schools"],
+        relatedCareers: ["psychology", "socio-public-policy"]
     }
 };
 

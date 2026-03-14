@@ -77,6 +77,30 @@ const responses = {
             "ಸರಿ, ನಿಮ್ಮ ವೃತ್ತಿ ಅನ್ವೇಷಣೆಗೆ ಮರಳೋಣ...",
             "ಸರಿ, ನಿಂತ ಕಡೆಯಿಂದ ಮುಂದುವರಿಯೋಣ."
         ]
+    },
+    thank_you: {
+        en: [
+            "You're very welcome! Happy to help. 😊 Feel free to ask anything else — career comparisons, salary info, exam tips — I'm here!",
+            "Glad that was useful! Is there another career or topic you'd like to explore?",
+            "Of course! That's what I'm here for. Anything else on your mind?"
+        ],
+        kn: [
+            "ತುಂಬಾ ಸ್ವಾಗತ! ಸಹಾಯ ಮಾಡಲು ಸಂತೋಷ. 😊 ಇನ್ನೇನಾದರೂ ಕೇಳಿ!",
+            "ಅದು ಉಪಯುಕ್ತವಾಗಿದ್ದಕ್ಕೆ ಸಂತೋಷ! ಇನ್ನಾವ ವೃತ್ತಿ ಅಥವಾ ವಿಷಯ ತಿಳಿಯಬೇಕು?",
+            "ಖಂಡಿತ! ಇದಕ್ಕಾಗಿಯೇ ನಾನು ಇಲ್ಲಿದ್ದೇನೆ. ಮನಸ್ಸಲ್ಲಿ ಇನ್ನೇನಾದರೂ ಇದೆಯೇ?"
+        ]
+    },
+    farewell: {
+        en: [
+            "Goodbye! All the best on your career journey. 😊 Come back anytime you have more questions!",
+            "See you! Remember — every big career starts with a single informed decision. You're already ahead by asking the right questions.",
+            "Take care! Wishing you the very best. Feel free to return whenever you need guidance."
+        ],
+        kn: [
+            "ವಿದಾಯ! ನಿಮ್ಮ ವೃತ್ತಿ ಪ್ರಯಾಣದಲ್ಲಿ ಶುಭ ಹಾರೈಕೆ. 😊 ಇನ್ನಷ್ಟು ಪ್ರಶ್ನೆ ಇದ್ದರೆ ಮರಳಿ ಬನ್ನಿ!",
+            "ಶೀಘ್ರ ಭೇಟಿಯಾಗೋಣ! ಸರಿಯಾದ ಪ್ರಶ್ನೆ ಕೇಳುವ ಮೂಲಕ ನೀವು ಈಗಾಗಲೇ ಮುಂದಿದ್ದೀರಿ.",
+            "ಜಾಗ್ರತೆ! ಅತ್ಯುತ್ತಮ ಹಾರೈಕೆ. ಮಾರ್ಗದರ್ಶನ ಬೇಕಾದಾಗ ಮರಳಿ ಬನ್ನಿ."
+        ]
     }
 };
 

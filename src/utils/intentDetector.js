@@ -70,6 +70,9 @@ export const detectIntents = (text) => {
         arts_stigma: /\b(arts (bad|useless|no scope)|humanities scope|is arts good|no future in arts)\b/i,
         gap_year: /\b(gap year|taking a break|year off|drop year|dropper|repeat year)\b/i,
         startup_interest: /\b(startup|own business|entrepreneur|self.?employ|business idea|freelance|be my own boss)\b/i,
+        // ── NEW ────────────────────────────────────────────────────────────────
+        mental_health: /\b(stressed out|burnt out|burnout|anxiety|anxious|overwhelmed|can'?t cope|feeling low|hopeless|lost motivation|no motivation|exam fear|exam anxiety|fear of failure|depressed|mental health|tired of studying)\b/i,
+        score_based: /\b(got \d+%|my marks|my score|low marks|scored \d+|marks are low|failed in|board result|result out)\b/i,
     };
     for (const [type, regex] of Object.entries(doubtPatterns)) {
         if (regex.test(normalizedText)) {
@@ -95,6 +98,16 @@ export const detectIntents = (text) => {
     // 8. Greeting
     if (/\b(hi|hello|hey|howdy|sup|namaste|good morning|good afternoon|good evening|how are you|how r u|what's up|whats up|heyy)\b/i.test(normalizedText)) {
         detected.push({ intent: 'greeting', priority: INTENTS.greeting });
+    }
+
+    // 9. Thank you
+    if (/\b(thank you|thanks|thank u|thx|ty|grateful|appreciate|that helped|so helpful|nicely explained|good bot)\b/i.test(normalizedText)) {
+        detected.push({ intent: 'thank_you', priority: 3.5 });
+    }
+
+    // 10. Goodbye / farewell
+    if (/\b(bye|goodbye|good bye|see you|see ya|gotta go|talk later|cya|take care|ttyl|have to go)\b/i.test(normalizedText)) {
+        detected.push({ intent: 'goodbye', priority: 3.5 });
     }
 
     // 9. When no intent matched and it looks like a question — try to extract detail

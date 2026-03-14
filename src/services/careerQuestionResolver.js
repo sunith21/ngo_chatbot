@@ -78,7 +78,6 @@ const CAREER_NAME_ALIASES = {
     'ca': 'ca',
     'chartered accountant': 'ca',
     'accountant': 'ca',
-    'finance': 'ca',
     'cpa': 'ca',
 
     // Actuarial
@@ -128,8 +127,6 @@ const CAREER_NAME_ALIASES = {
     'social worker': 'socio-public-policy',
     'public policy': 'socio-public-policy',
     'ngo': 'socio-public-policy',
-    'journalism': 'socio-public-policy',
-    'journalist': 'socio-public-policy',
 
     // UI/UX
     'designer': 'ui-ux-design',
@@ -182,7 +179,126 @@ const CAREER_NAME_ALIASES = {
     'mechanic': 'iti-trade',
     'vocational': 'iti-trade',
     'diploma': 'iti-trade',
+
+    // Architecture
+    'architect': 'architecture',
+    'architecture': 'architecture',
+    'b.arch': 'architecture',
+    'urban planner': 'architecture',
+    'interior designer': 'architecture',
+
+    // Merchant Navy
+    'merchant navy': 'merchant-navy',
+    'navy officer': 'merchant-navy',
+    'ship captain': 'merchant-navy',
+    'marine engineer': 'merchant-navy',
+    'nautical science': 'merchant-navy',
+    'seafarer': 'merchant-navy',
+
+    // Data Analytics
+    'data analyst': 'data-analytics',
+    'data analytics': 'data-analytics',
+    'business analyst': 'data-analytics',
+    'business intelligence': 'data-analytics',
+    'bi analyst': 'data-analytics',
+    'data engineer': 'data-analytics',
+
+    // Dentistry
+    'dentist': 'dentistry',
+    'dentistry': 'dentistry',
+    'bds': 'dentistry',
+    'orthodontist': 'dentistry',
+    'dental': 'dentistry',
+
+    // Veterinary
+    'vet': 'veterinary',
+    'veterinarian': 'veterinary',
+    'veterinary': 'veterinary',
+    'bvsc': 'veterinary',
+    'animal doctor': 'veterinary',
+
+    // Journalism
+    'journalist': 'journalism',
+    'journalism': 'journalism',
+    'reporter': 'journalism',
+    'news anchor': 'journalism',
+    'mass communication': 'journalism',
+    'media': 'journalism',
+
+    // Hotel Management
+    'hotel management': 'hotel-management',
+    'hospitality': 'hotel-management',
+    'hotel manager': 'hotel-management',
+    'chef': 'hotel-management',
+    'event planner': 'hotel-management',
+
+    // Fashion Design
+    'fashion designer': 'fashion-design',
+    'fashion design': 'fashion-design',
+    'fashion': 'fashion-design',
+    'stylist': 'fashion-design',
+    'nift': 'fashion-design',
+
+    // Animation & VFX
+    'animator': 'animation-vfx',
+    'animation': 'animation-vfx',
+    'vfx': 'animation-vfx',
+    'vfx artist': 'animation-vfx',
+    '3d artist': 'animation-vfx',
+    'game designer': 'animation-vfx',
+
+    // Teaching
+    'teacher': 'teaching',
+    'teaching': 'teaching',
+    'educator': 'teaching',
+    'b.ed': 'teaching',
+    'professor': 'teaching',
+    'lecturer': 'teaching',
+    'edtech': 'teaching',
+
+    // Cybersecurity / Game Dev / Cloud (missing aliases)
+    'ethical hacker': 'btech-cs-ai',
+    'cybersecurity': 'btech-cs-ai',
+    'cyber security': 'btech-cs-ai',
+    'cloud engineer': 'btech-cs-ai',
+    'cloud computing': 'btech-cs-ai',
+    'devops': 'btech-cs-ai',
+    'full stack': 'btech-cs-ai',
+    'full stack developer': 'btech-cs-ai',
+    'game dev': 'animation-vfx',
+    'game developer': 'animation-vfx',
+    'game development': 'animation-vfx',
+
+    // Product / Business
+    'product manager': 'management-bba',
+    'product management': 'management-bba',
+    'sports management': 'management-bba',
+    'event management': 'hotel-management',
+
+    // Finance extras
+    'investment banker': 'ca',
+    'stock market': 'ca',
+    'ca foundation': 'ca',
+    'bcom': 'ca',
+    'b.com': 'ca',
+    'financial analyst': 'ca',
+
+    // Digital / Content
+    'content writer': 'digital-marketing',
+    'youtuber': 'digital-marketing',
+    'blogger': 'digital-marketing',
+    'social media': 'digital-marketing',
+
+    // Defence extras
+    'pilot': 'defence-tech',
+    'air traffic control': 'defence-tech',
+    'coast guard': 'defence-tech',
 };
+
+// Pre-sorted once at module load (longest alias first for specificity).
+// Eliminates re-sorting on every message the user sends.
+const SORTED_ALIASES = Object.entries(CAREER_NAME_ALIASES)
+    .sort((a, b) => b[0].length - a[0].length);
 
 /**
  * Find the best career ID match in user's text.
@@ -192,11 +308,7 @@ const CAREER_NAME_ALIASES = {
 function extractCareerIdFromText(text, allCareers) {
     const lower = text.toLowerCase();
 
-    // Sort aliases by length descending so "software engineer" wins over "engineer"
-    const sortedAliases = Object.entries(CAREER_NAME_ALIASES)
-        .sort((a, b) => b[0].length - a[0].length);
-
-    for (const [alias, id] of sortedAliases) {
+    for (const [alias, id] of SORTED_ALIASES) {
         if (lower.includes(alias)) return id;
     }
 

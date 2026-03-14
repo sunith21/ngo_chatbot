@@ -1,0 +1,47 @@
+graph TD
+    %% Main Component
+    User((User)) -->|Interacts| Chatbot[Chatbot Component]
+
+    %% UI Components
+    Chatbot --> |Renders| RoadmapUI[Roadmap Template UI]
+    Chatbot --> |Renders| ParticleUI[Particle Constellation UI]
+    Chatbot --> |Renders| CursorUI[Cursor Trail UI]
+
+    %% Input Processing
+    Chatbot -->|Forwards Query| FreeText[Free Text Handler]
+    Chatbot -->|Forwards Query| Resolver[Career Question Resolver]
+
+    %% Services Layer
+    FreeText --> |Uses| NLP[NLP Service]
+    Resolver --> |Uses| NLP
+    
+    Resolver --> |Fallback AI| Groq[Groq Service]
+    Resolver --> |Fallback AI| Gemini[Gemini Service]
+
+    FreeText -->|Handles Input via| Compare[Comparison Engine]
+    FreeText -->|Handles Input via| Guide[Guidance Engine]
+    FreeText -->|Handles Input via| Interest[Interest Engine]
+    FreeText -->|Handles Input via| Roadmap[Roadmap Service]
+
+    %% Data Layer
+    Compare --> |Reads| CData[(Career Data)]
+    Compare --> |Reads| CompData[(Comparison Data)]
+    
+    Guide --> |Reads| CData
+    Guide --> |Reads| EduData[(Education Data)]
+    
+    Interest --> |Reads| EnrData[(Enrichment Data)]
+    Interest --> |Reads| QuizData[(Quiz Data)]
+    
+    FreeText --> |Reads| ConvData[(Conversational/Doubt Data)]
+
+    %% Styling
+    classDef ui fill:#4facfe,stroke:#00f2fe,stroke-width:2px,color:#fff;
+    classDef service fill:#f6d365,stroke:#fda085,stroke-width:2px,color:#333;
+    classDef data fill:#a18cd1,stroke:#fbc2eb,stroke-width:2px,color:#fff;
+    classDef ai fill:#ff9a9e,stroke:#fecfef,stroke-width:2px,color:#333;
+
+    class Chatbot,RoadmapUI,ParticleUI,CursorUI ui;
+    class FreeText,Resolver,Compare,Guide,Interest,Roadmap,NLP service;
+    class CData,CompData,EduData,EnrData,QuizData,ConvData data;
+    class Groq,Gemini ai;

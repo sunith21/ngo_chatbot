@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import educationData from "../data/educationData";
 import careerData from "../data/careerData";
 import { enrichCareerData } from "../data/careerEnrichment";
@@ -14,16 +14,31 @@ import { detectInterestsFromText, looksLikeInterestStatement, findCareersByIds }
 import { detectCareerDetailIntent } from "../utils/fuzzyMatcher";
 import { RoadmapTemplate } from "./RoadmapTemplate";
 import ReactMarkdown from "react-markdown";
-import { handleFreeText } from "../services/freeTextHandler";
+import { handleFreeText, handlePriorityFreeText } from "../services/freeTextHandler";
 import { askGemini } from "../services/geminiService";
 import { askGroq } from "../services/groqService";
 import { resolveCareerQuestion } from "../services/careerQuestionResolver";
+import { resolveComparison, resolveComparisonSide } from '../services/comparisonEngine';
 
 // Enrich career data once at module level
 const enrichedCareerData = enrichCareerData(careerData);
 
 // Flat list of all careers for the question resolver
 const ALL_CAREERS = Object.values(enrichedCareerData).flatMap(cat => Object.values(cat).flat());
+
+// Dev-time warning for missing HF key
+if (!process.env.REACT_APP_HF_API_KEY) {
+  console.warn('[Chatbot] REACT_APP_HF_API_KEY not set — Hugging Face NLP pipeline disabled. Groq/Gemini fallbacks will handle queries.');
+}
+
+// Memoized message bubble — only re-renders when its own text/sender changes.
+// Prevents the entire message list from re-rendering on every new message.
+const MessageBubble = React.memo(({ sender, text }) => (
+  <div className={`chat-bubble ${sender}`}>
+    <ReactMarkdown>{text}</ReactMarkdown>
+  </div>
+));
+MessageBubble.displayName = 'MessageBubble';
 
 const Chatbot = ({ onFieldChange }) => {
   const [state, setState] = useState(() => {
@@ -39,7 +54,7 @@ const Chatbot = ({ onFieldChange }) => {
       stateVersion: 1, step: 'class', selectedCareer: null, pausedStep: null,
       awaitingResume: false, isQuizMode: false, quizIndex: 0,
       quizScores: { Science: 0, Commerce: 0, Arts: 0 }, language: 'en',
-      lastShownId: null
+      lastShownId: null, lastComparison: null,
     };
   });
 
@@ -70,15 +85,32 @@ const Chatbot = ({ onFieldChange }) => {
     return field;
   };
 
-  useEffect(() => { localStorage.setItem("chatbot_messages", JSON.stringify(messages)); }, [messages]);
-  useEffect(() => { localStorage.setItem("chatbot_state", JSON.stringify(state)); }, [state]);
+  // Debounce timers for localStorage — avoids blocking the main thread on every render
+  const msgSaveTimer = useRef(null);
+  const stateSaveTimer = useRef(null);
+
+  useEffect(() => {
+    clearTimeout(msgSaveTimer.current);
+    msgSaveTimer.current = setTimeout(() => {
+      localStorage.setItem("chatbot_messages", JSON.stringify(messages));
+    }, 800);
+  }, [messages]);
+
+  useEffect(() => {
+    clearTimeout(stateSaveTimer.current);
+    stateSaveTimer.current = setTimeout(() => {
+      localStorage.setItem("chatbot_state", JSON.stringify(state));
+    }, 800);
+  }, [state]);
+
   useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, typing]);
 
-  const addBotMessage = (text, delay = 500) => {
+  const addBotMessage = useCallback((text, delay = 500) => {
     setTyping(true);
     setTimeout(() => { setMessages(prev => [...prev, { sender: "bot", text }]); setTyping(false); }, delay);
-  };
-  const addUserMessage = (text) => setMessages(prev => [...prev, { sender: "user", text }]);
+  }, []);
+
+  const addUserMessage = useCallback((text) => setMessages(prev => [...prev, { sender: "user", text }]), []);
 
   const handleClassClick = (cls) => {
     addUserMessage(cls === "10" ? t('class10') : t('class12'));
@@ -283,6 +315,8 @@ const Chatbot = ({ onFieldChange }) => {
     }
     if (top.intent === 'help') { addBotMessage(getRandomResponse('help', lang)); return; }
     if (top.intent === 'greeting') { addBotMessage(getRandomResponse('greeting', lang)); return; }
+    if (top.intent === 'thank_you') { addBotMessage(getRandomResponse('thank_you', lang)); return; }
+    if (top.intent === 'goodbye') { addBotMessage(getRandomResponse('farewell', lang)); return; }
     addBotMessage(getRandomResponse('fallback', lang));
   };
 
@@ -290,6 +324,9 @@ const Chatbot = ({ onFieldChange }) => {
     e.preventDefault();
     if (!inputText.trim() || isProcessing) return;
     const userText = inputText.trim();
+    // Capture current messages snapshot BEFORE addUserMessage updates state
+    // so we can pass accurate history to Groq/Gemini
+    const currentMessages = messages;
     addUserMessage(userText);
     setInputText("");
     setIsProcessing(true);
@@ -301,20 +338,75 @@ const Chatbot = ({ onFieldChange }) => {
       if (career) { handleCareerClick(career); setIsProcessing(false); return; }
     }
 
-    // ── 1. Free text semantic handler (highest priority)
-    // Handles parental pressure, abroad, salary anxiety, job market, arts stigma, etc.
-    // Must run FIRST to avoid being swallowed by generic interest/keyword matching.
-    const freeResult = handleFreeText(userText, lang);
-    if (freeResult) {
-      addBotMessage(freeResult.response);
-      if (freeResult.followUp) setTimeout(() => addBotMessage(freeResult.followUp), 1200);
+    // ── 0.3. Comparison follow-up reply handler
+    // After showing a comparison table, if the user types a preference like
+    // "treating patients" or "coding", detect the leaning and show that career.
+    if (state.lastComparison) {
+      const leanedCareer = resolveComparisonSide(userText, state.lastComparison);
+      if (leanedCareer) {
+        const career = ALL_CAREERS.find(c => c.id === leanedCareer);
+        if (career) {
+          setState(prev => ({ ...prev, lastComparison: null }));
+          addBotMessage(`Great choice! Let me show you what a career in **${career.name?.en || career.name}** looks like.`);
+          setTimeout(() => handleCareerClick(career), 800);
+          setIsProcessing(false);
+          return;
+        }
+      }
+    }
+
+    // ── 0.5. Bare detail keyword + context handler
+    // If user types just "salary", "growth", "day", etc. as a follow-up after we
+    // already showed them a career (lastShownId is set), answer with that career's data.
+    // This prevents "salary" from being swallowed by the generic salary_anxiety topic.
+    if (state.lastShownId) {
+      const detailKeyFromText = detectCareerDetailIntent(userText);
+      if (detailKeyFromText) {
+        const contextCareer = ALL_CAREERS.find(c => c.id === state.lastShownId);
+        if (contextCareer) {
+          // Import buildResponse-equivalent by calling resolveCareerQuestion with the
+          // career name injected so it can match and serve the detail.
+          const syntheticQuery = `${detailKeyFromText} for ${contextCareer.name?.en || contextCareer.name}`;
+          const contextResult = resolveCareerQuestion(syntheticQuery, ALL_CAREERS, lang);
+          if (contextResult) {
+            addBotMessage(contextResult.response);
+            if (contextResult.followUp) setTimeout(() => addBotMessage(contextResult.followUp), 1200);
+            setIsProcessing(false);
+            return;
+          }
+        }
+      }
+    }
+
+    // ── 0.9. Priority free-text topics (must beat career resolver)
+    // Catches mental health, exam prep, thank-you, government jobs, distance study
+    // BEFORE the career resolver can intercept their keywords.
+    const priorityResult = handlePriorityFreeText(userText, lang);
+    if (priorityResult) {
+      addBotMessage(priorityResult.response);
+      if (priorityResult.followUp) setTimeout(() => addBotMessage(priorityResult.followUp), 1200);
       setIsProcessing(false);
       return;
     }
 
-    // ── 1.5. Career question resolver
-    // Handles any question about a named career (salary, growth, day, exams, etc.)
-    // e.g. "what is the salary of a software engineer?" or "tell me about psychology"
+    // ── 1. Comparison / suitability engine (RUNS FIRST)
+    // Handles: "should I take engineering or medical", "CS vs CA", "will medicine suit me"
+    // Must run before careerQuestionResolver so two-career queries get a table, not a
+    // single-career info card (e.g. "engineering or medical" would otherwise resolve to
+    // just "Core Engineering").
+    const compResult = resolveComparison(userText, lang);
+    if (compResult) {
+      addBotMessage(compResult.response);
+      // Store which comparison was shown so we can handle the follow-up reply
+      setState(prev => ({ ...prev, lastComparison: compResult.comparisonKey, lastShownId: null }));
+      if (compResult.followUp) setTimeout(() => addBotMessage(compResult.followUp), 1200);
+      setIsProcessing(false);
+      return;
+    }
+
+    // ── 1.2. Career question resolver
+    // Handles any question about a single named career (salary, growth, day, exams, etc.)
+    // Runs after comparison engine so two-career queries are already handled above.
     const careerResult = resolveCareerQuestion(userText, ALL_CAREERS, lang);
     if (careerResult) {
       addBotMessage(careerResult.response);
@@ -324,6 +416,17 @@ const Chatbot = ({ onFieldChange }) => {
       const matchedId = ALL_CAREERS.find(c => c.name?.en === careerResult.careerName || c.id === careerResult.careerName)?.id;
       if (matchedId) setState(prev => ({ ...prev, lastShownId: matchedId }));
 
+      setIsProcessing(false);
+      return;
+    }
+
+    // ── 1.5. Free text semantic handler
+    // Handles parental pressure, abroad, generic salary anxiety, job market, arts stigma, etc.
+    // Runs AFTER career resolver so named-career queries get specific answers first.
+    const freeResult = handleFreeText(userText, lang);
+    if (freeResult) {
+      addBotMessage(freeResult.response);
+      if (freeResult.followUp) setTimeout(() => addBotMessage(freeResult.followUp), 1200);
       setIsProcessing(false);
       return;
     }
@@ -414,21 +517,35 @@ const Chatbot = ({ onFieldChange }) => {
       else if (entities.class && state.step === 'class') handleClassClick(entities.class);
       else if (entities.stream && state.step === 'stream') handleStreamClick(entities.stream);
       else if (originalIntent === "stream_confusion" || originalIntent === "exam_doubt" || action === "career_question") {
+        // Only show local guidance — do NOT also call AI fallback to avoid duplicate messages
         addBotMessage(finalBotResponse);
         setTimeout(() => addBotMessage(guidance.followUp), 1200);
       } else {
         // AI Fallback priority: Groq > Gemini > Local Fallback
-        const aiResp = await askGroq(userText, messages) || await askGemini(userText, messages);
-        if (aiResp) addBotMessage(aiResp);
+        // Pass current context so AI knows what the user is looking at
+        const aiContext = {
+          step: state.step,
+          career: state.selectedCareer?.name?.en || null,
+        };
+        // Show typing indicator while AI is thinking
+        setTyping(true);
+        // Use currentMessages (pre-send snapshot) so history is accurate
+        const aiResp = await askGroq(userText, currentMessages, aiContext) || await askGemini(userText, currentMessages, aiContext);
+        setTyping(false);
+        if (aiResp) addBotMessage(aiResp, 0);
         else { const detected = detectIntents(userText); processIntents(detected); }
       }
     } catch (error) {
       console.error('Main AI pipe failed:', error);
       // Main NLP pipe failed — try smart AI fallback before falling back to local regex
       try {
-        const aiResp = await askGroq(userText, messages) || await askGemini(userText, messages);
-        if (aiResp) { addBotMessage(aiResp); setIsProcessing(false); return; }
+        const aiContext = { step: state.step, career: state.selectedCareer?.name?.en || null };
+        setTyping(true);
+        const aiResp = await askGroq(userText, currentMessages, aiContext) || await askGemini(userText, currentMessages, aiContext);
+        setTyping(false);
+        if (aiResp) { addBotMessage(aiResp, 0); setIsProcessing(false); return; }
       } catch (aiError) {
+        setTyping(false);
         console.error('Full AI failure:', aiError);
       }
       const detected = detectIntents(userText);
@@ -447,9 +564,7 @@ const Chatbot = ({ onFieldChange }) => {
 
       <div className="chat-box">
         {messages.map((msg, i) => (
-          <div key={i} className={`chat-bubble ${msg.sender}`}>
-            <ReactMarkdown>{msg.text}</ReactMarkdown>
-          </div>
+          <MessageBubble key={i} sender={msg.sender} text={msg.text} />
         ))}
         {typing && (
           <div className="chat-bubble bot typing-indicator">

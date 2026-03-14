@@ -10,13 +10,13 @@
  */
 
 const GEMINI_API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
-const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 /**
  * The system prompt constrains Gemini to act as a career counselor
  * for Indian students, keeping responses focused and relevant.
  */
-const SYSTEM_CONTEXT = `You are a friendly, empathetic career counselor assistant for Indian students (Class 10-12).
+const BASE_SYSTEM_CONTEXT = `You are a friendly, empathetic career counselor assistant for Indian students (Class 10-12).
 Your role is to help students make informed decisions about their academic streams and career paths.
 
 Rules:
@@ -26,7 +26,18 @@ Rules:
 - Always end with a question that encourages the student to share more.
 - If you don't know something specific, say so and suggest where to look.
 - Do NOT recommend illegal or harmful activities.
-- Respond in the same language the student used (English or Kannada).`;
+- Respond in the same language the student used (English or Kannada).
+- Understand Indian-English phrases like "yaar", "kya karu", "paisa", "mummy daddy", "ghar wale".`;
+
+/**
+ * Builds the system context with optional chatbot state context.
+ */
+function buildSystemContext(context = {}) {
+    let ctx = BASE_SYSTEM_CONTEXT;
+    if (context.step) ctx += `\n\nCurrent state: Student is at the "${context.step}" step.`;
+    if (context.career) ctx += ` They are viewing the "${context.career}" career.`;
+    return ctx;
+}
 
 /**
  * Calls Gemini API with the user's message and conversation context.
@@ -36,21 +47,21 @@ Rules:
  * @param {Array<{role: string, text: string}>} recentMessages - Last few messages for context
  * @returns {Promise<string|null>}
  */
-export async function askGemini(userMessage, recentMessages = []) {
+export async function askGemini(userMessage, recentMessages = [], context = {}) {
     if (!GEMINI_API_KEY) {
         console.warn('REACT_APP_GEMINI_API_KEY not set. Gemini fallback disabled.');
         return null;
     }
 
-    // Build conversation history for Gemini (last 6 messages for context)
-    const history = recentMessages.slice(-6).map(msg => ({
+    // Build conversation history for Gemini (last 10 messages for richer context)
+    const history = recentMessages.slice(-10).map(msg => ({
         role: msg.sender === 'user' ? 'user' : 'model',
         parts: [{ text: msg.text }]
     }));
 
     const requestBody = {
         system_instruction: {
-            parts: [{ text: SYSTEM_CONTEXT }]
+            parts: [{ text: buildSystemContext(context) }]
         },
         contents: [
             ...history,
@@ -61,7 +72,7 @@ export async function askGemini(userMessage, recentMessages = []) {
         ],
         generationConfig: {
             temperature: 0.7,
-            maxOutputTokens: 300,
+            maxOutputTokens: 500,
             topP: 0.9,
         },
         safetySettings: [
@@ -71,12 +82,15 @@ export async function askGemini(userMessage, recentMessages = []) {
     };
 
     try {
-        const response = await fetch(GEMINI_API_URL, {
+        const fetchPromise = fetch(GEMINI_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestBody),
         });
+        const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(null), 8000));
+        const response = await Promise.race([fetchPromise, timeoutPromise]);
 
+        if (!response) { console.warn('Gemini request timed out'); return null; }
         if (!response.ok) {
             console.error('Gemini API error:', response.status);
             return null;
