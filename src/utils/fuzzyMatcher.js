@@ -53,7 +53,7 @@ export function sentenceContainsFuzzy(sentence, targets, threshold = 0.78) {
     return null;
 }
 
-// ── Synonym / paraphrase map ──────────────────────────────────────────────────
+
 // Maps natural-language phrasings → canonical intent keys
 export const INTENT_SYNONYMS = {
     salary: [

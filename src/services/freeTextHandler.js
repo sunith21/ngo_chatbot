@@ -10,7 +10,7 @@
  */
 
 const TOPIC_RESPONSES = {
-    // ── Parental / family pressure ─────────────────────────────────
+
     parental_pressure: {
         keywords: ['parents', 'family', 'mom', 'dad', 'father', 'mother', 'forcing', 'pressure', 'force me', 'they want', 'my parents want', 'parent pressure', 'nagging', 'mummy', 'daddy', 'ghar wale', 'log kehte', 'society pressure', 'relatives', 'gharwale', 'bade log', 'everyone says', 'people expect'],
         en: `It can be tough when the people who love you the most have a different vision for your future. Here's how to handle it:\n\n- **Have an honest conversation**: Share your interests and show you've thought it through. Facts and passion together are very persuasive.\n- **Find a middle ground**: Many careers blend both interests — e.g., a CS student can pivot into healthcare tech, satisfying both tech and medicine goals.\n- **Seek a mentor**: A third-party voice (teacher, counselor) sometimes helps parents open up to new ideas.\n- **Give it time**: Most parents come around once they see your commitment and a clear plan.\n\nRemember — it's *your* life and you'll be the one living it every single day.`,
@@ -18,7 +18,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "What career are your parents pushing you towards, vs what *you* actually want?", kn: "ನಿಮ್ಮ ಪೋಷಕರು ಯಾವ ವೃತ್ತಿ ಸೂಚಿಸುತ್ತಿದ್ದಾರೆ, ಮತ್ತು ನಿಮಗೆ ಏನು ಬೇಕು?" }
     },
 
-    // ── Abroad / international opportunities ──────────────────────
+
     abroad_opportunities: {
         keywords: ['abroad', 'foreign', 'overseas', 'international', 'usa', 'uk', 'canada', 'germany', 'australia', 'us job', 'migrate', 'immigration', 'work abroad', 'study abroad', 'ms', 'masters abroad'],
         en: `Going abroad is a very achievable goal! Here's what you should know:\n\n- **Study Abroad**: MS in CS, Engineering, or MBA from the US/UK/Canada/Germany can be transformative. GRE/GMAT + IELTS/TOEFL scores are typically required.\n- **Work Visa Routes**: Many countries (Canada, Germany, Australia) have points-based immigration that rewards skilled professionals highly.\n- **Indian Advantages**: Indias strong STEM foundation means Indian graduates are highly recruited globally, especially in tech, finance, and healthcare.\n- **Best Fields for Abroad**: Computer Science, Data Science, Nursing, Pharmacy, Engineering, and Finance.\n- **Timeline**: Most people plan 2–4 years ahead. Start with building your undergrad GPA and relevant experience now.`,
@@ -26,7 +26,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Which country or field interests you the most for your career abroad?", kn: "ವಿದೇಶದಲ್ಲಿ ನಿಮಗೆ ಯಾವ ದೇಶ ಅಥವಾ ಕ್ಷೇತ್ರ ಹೆಚ್ಚು ಆಸಕ್ತಿ ಉಂಟು ಮಾಡುತ್ತದೆ?" }
     },
 
-    // ── Salary / money anxiety ─────────────────────────────────────
+
     salary_anxiety: {
         keywords: ['money', 'salary', 'earn', 'earning', 'income', 'rich', 'poor', 'paying job', 'highest paying', 'most money', 'financially', 'afford', 'fee', 'expenses', 'loan', 'scholarship', 'paisa', 'kitna milega', 'good package', 'high package', 'package kitna', 'how much can i earn', 'how much do they earn', 'will i earn well'],
         en: `Money is a very valid concern! Here's an honest breakdown:\n\n- **Highest-Paying Fields in India**: CS/AI (8–60+ LPA), Finance/CA (10–40+ LPA), Medicine (6–30+ LPA post-specialization), Law (variable, high at top firms).\n- **Hidden Value**: Some lower-paying starting fields (like research or civil services) offer job security, prestige, and non-monetary benefits that are enormous.\n- **Skill Premium**: Regardless of field, specialization always raises your value. A mid-career CS professional with AI skills can earn 3x a generalist.\n- **Scholarships exist**: For most top programs! Don't let fees stop you from exploring a path — inform yourself first.\n\nDo you want me to show you the salary range for a specific career?`,
@@ -34,7 +34,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Would you like to see the salary range for a specific career you have in mind?", kn: "ನಿಮ್ಮ ಮನಸ್ಸಿನಲ್ಲಿರುವ ಯಾವುದೇ ವೃತ್ತಿಯ ಸಂಬಳ ವ್ಯಾಪ್ತಿ ತೋರಿಸಲೇ?" }
     },
 
-    // ── Job market / employment doubt ─────────────────────────────
+
     job_market: {
         keywords: ['job market', 'jobs available', 'unemployed', 'unemployment', 'placement', 'hire', 'hiring', 'companies', 'scope', 'future scope', 'job security', 'stable career', 'demand', 'market', 'koi future', 'is it worth it', 'any scope', 'good scope', 'career scope', 'naukri milegi', 'jobs milenge'],
         en: `The job market is definitely something worth thinking about carefully!\n\n- **High-Demand Now**: AI/ML, Cybersecurity, Data Science, Cloud Computing, Digital Health.\n- **Evergreen Stable**: Medicine, Law, Civil Services, Accounting (CA), Teaching.\n- **Growing Fast**: Mental Health (Psychologists), Green Energy (Engineers), E-commerce (Supply Chain).\n- **Smart Approach**: Rather than picking the "hottest" field today, look for the intersection of what you're good at AND what has growth potential.\n\nThe best career is one where you're skilled enough to be in the top 20% — that group is never unemployed.`,
@@ -42,7 +42,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Which field are you most concerned about — do you want me to check its current demand?", kn: "ಯಾವ ಕ್ಷೇತ್ರದ ಬಗ್ಗೆ ಹೆಚ್ಚು ಕಾಳಜಿ ಇದೆ? ಸದ್ಯದ ಬೇಡಿಕೆ ಪರಿಶೀಲಿಸಲೇ?" }
     },
 
-    // ── Peer comparison / confidence issues ───────────────────────
+
     peer_comparison: {
         keywords: ['my friends', 'classmates', 'peers', 'everyone else', 'falling behind', 'behind', 'average', 'not smart', 'not good enough', 'comparison', 'jealous', 'comparing', 'rank', 'topper'],
         en: `Comparing yourself to others is very natural — but it's also one of the biggest traps. Here's a reality check:\n\n- **Different Timelines**: Some people peak in their 20s; others in their 40s. Neither is wrong.\n- **Survivorship Bias**: The people you see "succeeding" early (toppers, medal winners) represent a tiny fraction. Most people find their path quietly.\n- **Your Unique Combination**: No one else has your exact mix of interests, experiences, and strengths. That's your competitive advantage.\n- **Focus Inward**: Replace "Am I ahead of them?" with "Am I better than I was last month?"\n\nYou're exactly where you need to be. Let's figure out your next step forward!`,
@@ -50,7 +50,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "What's *one* thing you feel you're genuinely good at or enjoy doing?", kn: "ನಿಮಗೆ ನಿಜವಾಗಿ ಚೆನ್ನಾಗಿ ಬರುವ ಅಥವಾ ಇಷ್ಟ ಆಗುವ *ಒಂದು* ವಿಷಯ ಏನು?" }
     },
 
-    // ── Arts stream stigma ─────────────────────────────────────────
+
     arts_stigma: {
         keywords: ['arts bad', 'arts useless', 'arts no scope', 'humanities scope', 'is arts good', 'arts career', 'no future in arts', 'arts stream worth', 'lit', 'literature', 'history career', 'geography career'],
         en: `Arts/Humanities is massively underrated and offers some of the most meaningful careers!\n\n- **High-Paying Arts Careers**: Law (top lawyers earn crores), Psychology (growing 40%+), Civil Services (IAS/IPS), Journalism, Content Strategy.\n- **The Creative Economy is Booming**: UX Writing, Copywriting, Scriptwriting, Game Narrative Design — all are exploding with salaries to match.\n- **Critical Thinking Edge**: Arts students are often better at communication, negotiation, and leadership — skills every company desperately needs.\n- **Cross-disciplinary Power**: A History grad who learns data analysis? Nearly impossible to replace.\n\nScience is about understanding the world. Arts is about understanding *people*. Both are vital.`,
@@ -58,7 +58,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Which Arts subjects do you enjoy the most? That's a great starting point for finding your career.", kn: "ಯಾವ ಕಲಾ ವಿಷಯಗಳು ನಿಮಗೆ ಹೆಚ್ಚು ಇಷ್ಟ? ಅದೇ ನಿಮ್ಮ ವೃತ್ತಿ ಹುಡುಕುವ ಆರಂಭ ಬಿಂದು." }
     },
 
-    // ── Engineering / tech specific ───────────────────────────────
+
     engineering_doubt: {
         keywords: ['engineering good', 'btech worth it', 'is engineering', 'cs good', 'cse scope', 'software good', 'it career', 'ai career', 'machine learning', 'data science career', 'coding career', 'developer career'],
         en: `Engineering (especially CS/AI) remains one of the best career bets in India and globally.\n\n**Why it's still strong:**\n- AI/ML roles are growing 30-40% YoY globally\n- Every industry (healthcare, finance, defense) now has a tech arm\n- Remote work = global job access from Day 1\n\n**Things to be aware of:**\n- Just passing Engineering is not enough — skills, projects, and internships matter more than the degree\n- Tier-1 college vs. Tier-3 college gap is real, but bridge-able with a strong portfolio\n- Specializations (AI, Cybersecurity, Cloud) command 2–3x salary of a generalist\n\nWant me to show you specific CS career paths and their salary ranges?`,
@@ -66,7 +66,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Are you more drawn to coding itself, or to the problem-solving and design side of tech?", kn: "ನಿಮಗೆ ಕೋಡಿಂಗ್ ಇಷ್ಟ, ಅಥವಾ ತಂತ್ರಜ್ಞಾನದ ಸಮಸ್ಯೆ-ಪರಿಹಾರ ಮತ್ತು ವಿನ್ಯಾಸ ಭಾಗ?" }
     },
 
-    // ── Medical / NEET specific ────────────────────────────────────
+
     medical_doubt: {
         keywords: ['neet', 'mbbs', 'doctor', 'medical career', 'medicine', 'mbbs worth', 'long duration', 'is medicine good', 'bds', 'dentist', 'pharmacy'],
         en: `Medicine is one of the most respected and recession-proof careers, though it demands significant commitment.\n\n**The honest picture:**\n- MBBS is 5.5 years + 1 year internship, then MD/MS (3 years) if you want specialization\n- Salary only gets very good post-specialization — but you have a job for life\n- NEET is competitive but crackable with the right preparation strategy (most people who succeed give it 2+ attempts)\n\n**Alternatives if NEET doesn't work out:**\n- BPT (Physiotherapy), B.Sc Nursing, B.Pharm — all part of healthcare, all well-paying\n- MBBS from abroad (Russia, China, Philippines) — valid option, requires FMGE exam to practice in India\n\nIs NEET your primary concern, or the career path itself?`,
@@ -74,7 +74,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Is NEET your primary worry, or are you unsure if medicine is the right fit for you?", kn: "NEET ಮುಖ್ಯ ಚಿಂತೆಯೇ, ಅಥವಾ ವೈದ್ಯಕೀಯ ಸರಿಯಾದ ಮಾರ್ಗ ಹೌದೇ ಎಂದು ಸಂಶಯವಿದೆಯೇ?" }
     },
 
-    // ── Regional / language / tier-2 city concerns ────────────────
+
     regional_concerns: {
         keywords: ['small town', 'village', 'rural', 'tier 2', 'tier 3', 'regional', 'local', 'kannada', 'hindi medium', 'state board', 'cbse vs state', 'language barrier', 'english problem', 'communication'],
         en: `Your background — wherever you're from — is not a barrier. Here's why:\n\n- **State Board students** regularly crack JEE, NEET, and UPSC. The exam doesn't care about your board.\n- **Language**: India's top companies today hire for skills. English can be learned — and improving it is simpler than ever (YouTube, apps, practice).\n- **Tier-2/3 cities**: Remote work has made location far less relevant. Many top tech companies hire from anywhere now.\n- **Regional languages as advantage**: Knowing Kannada, Hindi, or regional languages gives you an edge in government jobs, education, and research careers.\n\nWhere you start doesn't define where you finish!`,
@@ -82,7 +82,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Is there a specific career you're worried isn't accessible because of where you're from?", kn: "ನೀವು ಎಲ್ಲಿಂದ ಎಂಬ ಕಾರಣದಿಂದ ತಲುಪಲು ಸಾಧ್ಯವಿಲ್ಲ ಎಂದು ಚಿಂತೆ ಆಗಿರುವ ನಿರ್ದಿಷ್ಟ ವೃತ್ತಿ ಇದೆಯೇ?" }
     },
 
-    // ── Gap year / taking a break ─────────────────────────────────
+
     gap_year: {
         keywords: ['gap year', 'taking a break', 'year off', 'drop year', 'dropper', 'repeat year', 'take a year', 'wait a year'],
         en: `A gap year is a completely valid choice — and can be one of the best decisions you make!\n\n**When a gap year makes sense:**\n- You have a clear goal (re-attempt JEE/NEET, prepare for an exam) and a solid plan\n- You're using the time to explore, intern, or build a portfolio\n\n**When to be careful:**\n- A gap year without structure can hurt motivation — make a week-by-week schedule\n- If you don't have a specific goal, a gap year might delay things without benefit\n\n**What it won't do:** It won't close doors to you. Colleges and employers rarely penalize a year gap that was used productively.`,
@@ -90,7 +90,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "What's your main goal for the gap year — exam prep, exploration, work experience, or something else?", kn: "ಅಂತರ ವರ್ಷದ ಮುಖ್ಯ ಗುರಿ ಏನು — ಪರೀಕ್ಷೆ ತಯಾರಿ, ಅನ್ವೇಷಣೆ, ಕೆಲಸ, ಅಥವಾ ಬೇರೆ?" }
     },
 
-    // ── Exam prep strategy ────────────────────────────────────────
+
     exam_prep_tips: {
         priority: true,
         keywords: ['how to crack', 'crack jee', 'crack neet', 'crack upsc', 'prepare for jee', 'prepare for neet', 'neet preparation', 'jee preparation', 'upsc preparation', 'study tips', 'how to study', 'preparation tips', 'exam strategy', 'study plan', 'revision tips', 'mock test', 'coaching', 'self study'],
@@ -99,7 +99,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Which exam are you preparing for — JEE, NEET, UPSC, or something else?", kn: "ನೀವು ಯಾವ ಪರೀಕ್ಷೆಗೆ ತಯಾರಿ ನಡೆಸುತ್ತಿದ್ದೀರಿ — JEE, NEET, UPSC, ಅಥವಾ ಬೇರೆ?" }
     },
 
-    // ── Mental health / exam stress ───────────────────────────────
+
     mental_health_stress: {
         priority: true,
         keywords: ['stressed out', 'stress', 'anxiety', 'anxious', 'panic', 'burnt out', 'burnout', 'depressed', 'depression', 'overwhelmed', 'cant cope', 'can\'t cope', 'mental health', 'feeling low', 'hopeless', 'no motivation', 'lost motivation', 'tired of studying', 'boards pressure', 'exam fear', 'exam anxiety', 'fear of failure', 'scared', 'scared of failing', 'so scared', 'nervous', 'very nervous', 'worried', 'so worried', 'crying', 'want to cry', 'feeling bad', 'feeling horrible', 'feel like giving up', 'giving up', 'too much pressure', 'cant handle', 'yaar help', 'kya karu', 'what do i do', 'i am lost', 'feeling lost'],
@@ -108,7 +108,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Is this about a specific exam or more of a general feeling of overwhelm? Either way, I'm here.", kn: "ಇದು ನಿರ್ದಿಷ್ಟ ಪರೀಕ್ಷೆ ಬಗ್ಗೆಯೇ ಅಥವಾ ಸಾಮಾನ್ಯ ಒತ್ತಡ ಭಾವನೆಯೇ? ಹೇಗಿದ್ದರೂ ನಾನು ಇಲ್ಲಿದ್ದೇನೆ." }
     },
 
-    // ── Commerce stream doubt ─────────────────────────────────────
+
     commerce_doubt: {
         keywords: ['commerce worth', 'is commerce good', 'commerce scope', 'bcom', 'b.com', 'bba good', 'bba or bcom', 'commerce career', 'commerce after 12', 'commerce jobs', 'ca or bba', 'scope in commerce', 'commerce without maths', 'commerce with maths'],
         en: `Commerce is one of the strongest streams in India — and massively underestimated!\n\n**Top career paths from Commerce:**\n- **CA (Chartered Accountant)**: One of the highest-paying professional qualifications. Average salary post-articleship: ₹7–25 LPA\n- **BBA → MBA**: Opens management, marketing, HR, and consulting doors\n- **B.Com + CFA/CMA**: Finance and investment analysis roles globally\n- **Company Secretary (CS)**: Corporate law, compliance — a niche with very low competition\n- **Banking/Insurance**: IBPS, SBI PO, LIC AAO — stable, well-paying government jobs\n\n**Commerce with Maths** adds actuarial science, data analytics, and economics research as options.\n\n**Commerce without Maths** still covers CA, CS, BBA, BMS, and most banking exams.`,
@@ -116,7 +116,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Do you have Maths in your Commerce stream, or without — and which career interests you most?", kn: "ನಿಮ್ಮ ವಾಣಿಜ್ಯದಲ್ಲಿ ಗಣಿತ ಇದೆಯೇ? ಮತ್ತು ಯಾವ ವೃತ್ತಿ ಹೆಚ್ಚು ಆಸಕ್ತಿ ಹುಟ್ಟಿಸುತ್ತದೆ?" }
     },
 
-    // ── Coding / programming interest ─────────────────────────────
+
     coding_interest: {
         keywords: ['i love coding', 'love programming', 'enjoy coding', 'i like coding', 'spend time coding', 'good at coding', 'coding hobby', 'leetcode', 'hackathon', 'build apps', 'make websites', 'web development', 'app development', 'programming interest', 'i code', 'software interest'],
         en: `That's a fantastic strength to have — coding skills open an enormous number of doors!\n\n**Career paths that reward strong coding:**\n| Path | What you build |\n|---|---|\n| Software Engineer | Products, apps, systems at tech companies |\n| AI/ML Engineer | Intelligent models, recommendation systems |\n| Cybersecurity Analyst | Defenses, ethical hacking |\n| Game Developer | Games, simulations, interactive experiences |\n| Full-Stack Developer | Web apps (front end + back end) |\n| Data Engineer | Pipelines, databases, analytics systems |\n\n**To stand out:** Build 2–3 real projects (not just tutorials), put them on GitHub, and contribute to open-source. That portfolio matters more than your college's ranking.`,
@@ -124,7 +124,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "What kind of things do you enjoy building — websites, apps, games, or something data/AI related?", kn: "ನೀವು ಏನು ನಿರ್ಮಿಸಲು ಇಷ್ಟಪಡುತ್ತೀರಿ — ವೆಬ್‌ಸೈಟ್, ಅಪ್ಲಿಕೇಷನ್, ಆಟ, ಅಥವಾ ಡೇಟಾ/AI?" }
     },
 
-    // ── Creative / design interest ─────────────────────────────────
+
     creative_interest: {
         keywords: ['i love drawing', 'love art', 'enjoy drawing', 'i like art', 'creative person', 'good at drawing', 'art as career', 'design career', 'want creative job', 'love designing', 'graphic design', 'i sketch', 'painting career', 'creative field', 'love creating', 'visual arts'],
         en: `Being creative is a *massive* professional advantage — and the creative economy is booming!\n\n**High-growth creative careers:**\n- **UI/UX Design**: Designing apps and websites — avg salary ₹6–20 LPA, hugely in demand\n- **Graphic Design**: Brand identity, packaging, advertising for companies and agencies\n- **Animation & VFX**: India's animation industry is growing fast (Bollywood, OTT, gaming)\n- **Illustration**: Book covers, editorial, children's books, merchandise\n- **Fashion Design**: NIFT/NID entrance → fashion houses or your own label\n- **Architecture**: Combines technical drawing + spatial creativity (5-year B.Arch)\n- **Game Art**: Character and environment design for video games\n\n**Key schools**: NID, NIFT, Symbiosis Institute of Design, MIT Institute of Design — all have entrance exams.`,
@@ -132,7 +132,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Do you enjoy digital design (on a computer) or traditional art — or both? That shapes which path fits best.", kn: "ಡಿಜಿಟಲ್ ವಿನ್ಯಾಸ (ಕಂಪ್ಯೂಟರ್) ಇಷ್ಟ ಅಥವಾ ಸಾಂಪ್ರದಾಯಿಕ ಕಲೆ — ಅಥವಾ ಎರಡೂ?" }
     },
 
-    // ── Sports career ─────────────────────────────────────────────
+
     sports_career: {
         keywords: ['sports career', 'love sports', 'play cricket', 'play football', 'athlete', 'sports management', 'sports science', 'physical education', 'pe teacher', 'fitness career', 'yoga career', 'sports psychology', 'coaching career', 'sports coaching', 'career in sports', 'sports or studies', 'can i play professionally'],
         en: `Sports is a real, growing career space in India — and it's not limited to playing professionally!\n\n**On-field paths:**\n- Professional athlete (Cricket, Football, Badminton, Athletics) — extremely competitive but very real\n- SAI (Sports Authority of India) selection programs + state-level competitions are the entry route\n\n**Off-field careers (massive and growing):**\n- **Sports Management**: IPL, Pro Kabaddi, ISL teams need managers, event planners, marketers\n- **Sports Science / Physio**: Working with athletes on performance and injury recovery\n- **Sports Journalism / Commentary**: ESPN, Star Sports, Cricinfo always need sharp people\n- **Fitness & Wellness**: Personal training, nutrition coaching — huge post-COVID demand\n- **Physical Education Teacher**: Government + private school PE positions with strong job security\n- **Sports Psychology**: Emerging field, very low competition, high impact\n\n**Key institutes**: LNIPE (Gwalior), NSNIS (Patiala), Manipal — all have specific sports programs.`,
@@ -140,7 +140,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Are you interested in playing professionally, or more in the management / coaching / science side of sports?", kn: "ವೃತ್ತಿಪರ ಆಟಗಾರನಾಗಬೇಕೇ, ಅಥವಾ ನಿರ್ವಹಣೆ / ತರಬೇತಿ / ಕ್ರೀಡಾ ವಿಜ್ಞಾನ ಭಾಗ ಇಷ್ಟ?" }
     },
 
-    // ── Government job preference ─────────────────────────────────
+
     government_job: {
         priority: true,
         keywords: ['government job', 'sarkari naukri', 'sarkari job', 'stable job', 'secure job', 'bank po', 'bank exam', 'ssc', 'ssc cgl', 'ibps', 'rrb', 'group d', 'psc', 'state psc', 'civil services', 'ias preparation', 'ips preparation', 'prefer government', 'job security', 'pension', 'central government'],
@@ -149,7 +149,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Which type of government job interests you most — administrative (UPSC), banking, defence, or railway?", kn: "ಯಾವ ಸರ್ಕಾರಿ ವೃತ್ತಿ ಹೆಚ್ಚು ಆಸಕ್ತಿ ಹುಟ್ಟಿಸುತ್ತದೆ — ಆಡಳಿತ (UPSC), ಬ್ಯಾಂಕಿಂಗ್, ರಕ್ಷಣೆ, ಅಥವಾ ರೈಲ್ವೇ?" }
     },
 
-    // ── Thank you / positive acknowledgement ──────────────────────
+
     thank_you: {
         priority: true,
         keywords: ['thank you', 'thanks', 'thank u', 'thx', 'ty', 'grateful', 'appreciate', 'that helped', 'very helpful', 'this is helpful', 'so helpful', 'you explained', 'great answer', 'that was helpful', 'good bot', 'nicely explained'],
@@ -158,7 +158,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "Is there anything else you'd like to explore — a career comparison, entrance exam tips, or a specific field?", kn: "ಇನ್ನೇನಾದರೂ ಅನ್ವೇಷಿಸಬೇಕೇ — ವೃತ್ತಿ ಹೋಲಿಕೆ, ಪ್ರವೇಶ ಪರೀಕ್ಷೆ ಸಲಹೆ, ಅಥವಾ ನಿರ್ದಿಷ್ಟ ಕ್ಷೇತ್ರ?" }
     },
 
-    // ── Part-time / distance learning ────────────────────────────
+
     part_time_study: {
         priority: true,
         keywords: ['work while studying', 'study and work', 'part time study', 'distance education', 'correspondence course', 'ignou', 'online degree', 'evening college', 'working student', 'need to earn', 'study part time', 'distance learning', 'open university', 'can i work and study'],
@@ -167,7 +167,7 @@ const TOPIC_RESPONSES = {
         followUp: { en: "What field are you hoping to study — I can point you to the best distance/online program for it.", kn: "ಯಾವ ಕ್ಷೇತ್ರ ಓದಬೇಕು ಎಂದು ಯೋಚಿಸುತ್ತಿದ್ದೀರಿ? ಅದಕ್ಕೆ ಅತ್ಯುತ್ತಮ ದೂರ/ಆನ್‌ಲೈನ್ ಕಾರ್ಯಕ್ರಮ ತೋರಿಸಲು ಸಾಧ್ಯ." }
     },
 
-    // ── Startup / entrepreneurship ────────────────────────────────
+
     startup: {
         keywords: ['startup', 'own business', 'entrepreneur', 'self employed', 'business idea', 'freelance', 'want to start', 'start my own', 'be my own boss'],
         en: `Entrepreneurship is exciting and very much possible even right out of college!\n\n**Key things to build now:**\n- **Domain Expertise**: Know your space deeply — don't start a startup just for the sake of it\n- **Network**: Connect with mentors, join college entrepreneurship cells, attend startup events\n- **Start Small**: Many successful companies started as college projects or freelance gigs\n- **Funding Ecosystem**: India has a vibrant ecosystem — NASSCOM iDEA, Startup India, BIRAC for biotech, IIT/IIM incubators\n\n**Honest Reality**: Most startups fail — but the skills you build are incredibly valuable and make you hireable anywhere. The experience itself is never wasted.`,
@@ -176,7 +176,7 @@ const TOPIC_RESPONSES = {
     },
 };
 
-// ── Exam specific encouraging details for mental health ────────
+
 const EXAM_ADVICE = {
     neet: {
         en: `\n\n**NEET specific advice:** Focus on Biology NCERT — it's 50% of your marks. Don't let Physics anxiety ruin your Bio/Chem flow. You've got this!`,

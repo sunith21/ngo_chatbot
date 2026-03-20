@@ -236,7 +236,7 @@ body {
   }
 }
 
-/* ── Tab Bar ─────────────────────────────────── */
+
 .detail-tabs {
   display: flex;
   gap: 6px;
@@ -296,7 +296,7 @@ body {
   width: 100%;
 }
 
-/* ── Mobile ───────────────────────────────────── */
+
 @media (max-width: 480px) {
   .chat-wrapper {
     width: 100vw;

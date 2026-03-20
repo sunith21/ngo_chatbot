@@ -13,7 +13,7 @@
 
 const careerComparisons = {
 
-    // ── CS / Software vs Medicine ──────────────────────────────────────────────
+
     'btech-cs-ai_mbbs': {
         careers: ['btech-cs-ai', 'mbbs'],
         keywords: [
@@ -55,7 +55,7 @@ Choose **Medicine** if you:
         followUp: `Which resonates more with you — building tech systems, or diagnosing and treating patients?`,
     },
 
-    // ── Core Engineering vs Medicine ───────────────────────────────────────────
+
     'btech-core_mbbs': {
         careers: ['btech-core', 'mbbs'],
         keywords: [
@@ -92,7 +92,7 @@ Choose **Medicine** if you:
         followUp: `Are you more excited by building physical infrastructure, or by treating and curing people?`,
     },
 
-    // ── CS vs CA ───────────────────────────────────────────────────────────────
+
     'btech-cs-ai_ca': {
         careers: ['btech-cs-ai', 'ca'],
         keywords: [
@@ -131,7 +131,7 @@ Choose **CA** if you:
         followUp: `Do you see yourself writing code to solve business problems, or auditing companies and managing financial strategy?`,
     },
 
-    // ── Engineering vs Law ─────────────────────────────────────────────────────
+
     'btech-core_law-integrated': {
         careers: ['btech-core', 'law-integrated'],
         keywords: [
@@ -168,7 +168,7 @@ Choose **Law** if you:
         followUp: `Between engineering problems and legal arguments — which type of challenge energizes you more?`,
     },
 
-    // ── CS vs Engineering ──────────────────────────────────────────────────────
+
     'btech-cs-ai_btech-core': {
         careers: ['btech-cs-ai', 'btech-core'],
         keywords: [
@@ -206,7 +206,7 @@ Choose **Core Engineering** if you:
         followUp: `Do you get more excited by writing code and building software, or by designing machines and physical systems?`,
     },
 
-    // ── Medicine vs Law ─────────────────────────────────────────────────────────
+
     'mbbs_law-integrated': {
         careers: ['mbbs', 'law-integrated'],
         keywords: [
@@ -243,7 +243,7 @@ Choose **Law** if you:
         followUp: `Do you see yourself in a hospital treating patients, or in a courtroom/boardroom arguing cases?`,
     },
 
-    // ── CS vs Management ──────────────────────────────────────────────────────
+
     'btech-cs-ai_management-bba': {
         careers: ['btech-cs-ai', 'management-bba'],
         keywords: [
@@ -282,7 +282,7 @@ Choose **Management (BBA/MBA)** if you:
         followUp: `Do you prefer building the product or building the business around it?`,
     },
 
-    // ── CA vs Civil Services ───────────────────────────────────────────────────
+
     'ca_civil-services': {
         careers: ['ca', 'civil-services'],
         keywords: [
@@ -319,7 +319,7 @@ Choose **Civil Services** if you:
         followUp: `Do you see yourself in a corporate boardroom making financial decisions, or as a District Collector shaping policy on the ground?`,
     },
 
-    // ── Medicine vs Psychology ─────────────────────────────────────────────────
+
     'mbbs_psychology': {
         careers: ['mbbs', 'psychology'],
         keywords: [
@@ -355,7 +355,7 @@ Choose **Psychology** if you:
         followUp: `Are you more drawn to physical medicine (treating illness) or mental health (supporting the mind)?`,
     },
 
-    // ── Engineering vs Defence ─────────────────────────────────────────────────
+
     'btech-core_defence-tech': {
         careers: ['btech-core', 'defence-tech'],
         keywords: [
@@ -391,7 +391,7 @@ Choose **Defence** if you:
         followUp: `Do you see yourself wearing a suit in a corporate office, or a uniform leading troops in the field?`,
     },
 
-    // ── CS vs UI/UX Design ─────────────────────────────────────────────────────
+
     'btech-cs-ai_ui-ux-design': {
         careers: ['btech-cs-ai', 'ui-ux-design'],
         keywords: [
@@ -429,7 +429,7 @@ Choose **UI/UX Design** if you:
         followUp: `Do you get more satisfaction from making something work perfectly under the hood, or making it beautiful and intuitive to use?`,
     },
 
-    // ── PCM vs PCB (Science stream choice) ────────────────────────────────────
+
     'pcm_pcb': {
         careers: ['btech-cs-ai', 'mbbs'],
         keywords: [
@@ -470,7 +470,7 @@ Choose **PCB** if you:
         followUp: `Which subject do you enjoy more right now — Maths or Biology?`,
     },
 
-    // ── BBA vs B.Com ──────────────────────────────────────────────────────────
+
     'management-bba_bcom': {
         careers: ['management-bba', 'banking-gov'],
         keywords: [
@@ -508,7 +508,7 @@ Choose **B.Com** if you:
         followUp: `Do you see yourself leading business teams (BBA → MBA), or building deep expertise in finance and taxation (B.Com → CA)?`,
     },
 
-    // ── Nursing vs MBBS ───────────────────────────────────────────────────────
+
     'allied-health_mbbs': {
         careers: ['allied-health', 'mbbs'],
         keywords: [
@@ -545,7 +545,7 @@ Choose **MBBS** if you:
         followUp: `Are you drawn more to hands-on patient care and nursing, or to diagnosing and prescribing as a doctor?`,
     },
 
-    // ── Pharmacy vs MBBS ──────────────────────────────────────────────────────
+
     'pharmacy_mbbs': {
         careers: ['pharmacy', 'mbbs'],
         keywords: [
@@ -582,7 +582,7 @@ Choose **MBBS** if you:
         followUp: `Do you prefer working in drug research and the pharma industry, or directly treating patients in a hospital?`,
     },
 
-    // ── Animation / VFX vs CS ─────────────────────────────────────────────────
+
     'animation-vfx_btech-cs-ai': {
         careers: ['animation-vfx', 'btech-cs-ai'],
         keywords: [
@@ -622,7 +622,7 @@ Choose **CS/Engineering** if you:
         followUp: `Do you spend more time drawing and creating visuals, or solving logic problems and writing code?`,
     },
 
-    // ── Journalism vs Law ─────────────────────────────────────────────────────
+
     'journalism_law-integrated': {
         careers: ['journalism', 'law-integrated'],
         keywords: [
@@ -660,7 +660,7 @@ Choose **Law** if you:
         followUp: `Do you prefer telling stories to inform society through media, or arguing cases in courts to fight for justice?`,
     },
 
-    // ── Teaching vs Psychology ────────────────────────────────────────────────
+
     'teaching_psychology': {
         careers: ['teaching', 'psychology'],
         keywords: [
@@ -696,7 +696,7 @@ Choose **Psychology** if you:
         followUp: `Do you get more satisfaction from teaching a class of 30 students, or helping one person work through their personal challenges?`,
     },
 
-    // ── BDS vs MBBS ───────────────────────────────────────────────────────────
+
     'dentistry_mbbs': {
         careers: ['dentistry', 'mbbs'],
         keywords: [
@@ -733,7 +733,7 @@ Choose **MBBS** if you:
         followUp: `Are you specifically drawn to oral and dental health, or the wider world of general medicine?`,
     },
 
-    // ── Banking / Govt Jobs vs CA ─────────────────────────────────────────────
+
     'banking-gov_ca': {
         careers: ['banking-gov', 'ca'],
         keywords: [
